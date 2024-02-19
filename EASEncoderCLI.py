@@ -25,31 +25,33 @@ if confirm.lower() == "no":
     exit()
 audio = input("Input your path for audio, if you want it, now. Or, input none for no audio. MUST BE A WAV FILE!!")
 if audio.lower() == "none":
+    print("none")
     if emulation.lower() == "das":
         print("Generating DASDEC Tones...")
         alerttonesnoaudio = EASGen.genEAS(header=header1, attentionTone=True, endOfMessage=True, sampleRate=48000)
         EASGen.export_wav("EASEncoderCLIGenTones.wav", alerttonesnoaudio)
         print("Successfully exported! Have fun! Made by miceoroni.")
-    exit()
+        exit()
     if emulation.lower() == "nws":
         print("Generating NWS Tones...")
         alerttonesnoaudio = EASGen.genEAS(header=header1, attentionTone=True, mode=emulation, endOfMessage=True).set_frame_rate(11025)
         EASGen.export_wav("EASEncoderCLIGenTones.wav", alerttonesnoaudio)
         print("Successfully exported! Have fun! Made by miceoroni.")
-    exit()
+        exit()
     if emulation.lower() == "tft":
         print("Generating TFT Tones...")
         alerttonesnoaudio = EASGen.genEAS(header=header1, attentionTone=True, endOfMessage=True).set_frame_rate(8000)
         EASGen.export_wav("EASEncoderCLIGenTones.wav", alerttonesnoaudio)
         print("Successfully exported! Have fun! Made by miceoroni.")
-    exit()
+        exit()
     # Just generate the actual headers with nothing
-    if "tft" not in emulation.lower and "tft" not in emulation.lower and "das" not in emulation.lower:
+    haha = emulation.lower()
+    if "tft" not in haha and "nws" not in haha and "das" not in haha:
         print("Generating tones...")
         alerttonesnoaudio = EASGen.genEAS(header=header1, attentionTone=True, endOfMessage=True, mode=emulation)
         EASGen.export_wav("EASEncoderCLIGenTones.wav", alerttonesnoaudio)
         print("Successfully exported! Have fun! Made by miceoroni.")
-    exit()
+        exit()
 else:
 # check if the audio actually exists
     audiocheck = os.path.isfile(audio)
@@ -60,31 +62,31 @@ else:
             alerttones = EASGen.genEAS(header=header1, attentionTone=True, endOfMessage=True, sampleRate=48000, audio=audioseg)
             EASGen.export_wav("EASEncoderCLIGenTones.wav", alerttones)
             print("Successfully exported! Have fun! Made by miceoroni.")
-    exit()
+            exit()
     if emulation.lower() == "nws":
         print("Generating NWS Tones...")
         audioseg = AudioSegment.from_wav(audio)
         alerttones = EASGen.genEAS(header=header1, attentionTone=True, endOfMessage=True, mode=emulation.upper, audio=audioseg).set_frame_rate(11025)
         EASGen.export_wav("EASEncoderCLIGenTones.wav", alerttones)
         print("Successfully exported! Have fun! Made by miceoroni.")
-    exit()
+        exit()
     if emulation.lower() == "tft":
         print("Generating TFT Tones...")
         audioseg = AudioSegment.from_wav(audio)
         alerttones = EASGen.genEAS(header=header1, attentionTone=True, endOfMessage=True, audio=audioseg).set_frame_rate(8000)
         EASGen.export_wav("EASEncoderCLIGenTones.wav", alerttones)
         print("Successfully exported! Have fun! Made by miceoroni.")
-    exit()
+        exit()
     # Just generate the actual headers with nothing
-    if "tft" not in emulation.lower and "tft" not in emulation.lower and "das" not in emulation.lower:
+    haha = emulation.lower()
+    if "tft" not in haha and "nws" not in haha and "das" not in haha:
         print("Generating tones...")
         audioseg = AudioSegment.from_wav(audio)
         alerttones = EASGen.genEAS(header=header1, attentionTone=True, endOfMessage=True, mode=emulation.upper, audio=audioseg)
+        EASGen.export_wav("EASEncoderCLIGenTones.wav", alerttones)
         print("Successfully exported! Have fun! Made by miceoroni.")
-    exit()
-    EASGen.export_wav("EASEncoderCLIGenTones.wav", alerttones)
-    print("Successfully exported! Have fun! Made by miceoroni.")
-    exit()
+        exit()
+
     if audiocheck is False:
         print("The audio file you have specified does not exist. Please try again.")
     exit()
